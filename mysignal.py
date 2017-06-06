@@ -14,6 +14,13 @@ class Signal:
         write(filename,self.rate,self.data)
 
     def amplify(self,gain):
+        gain = max(1.0,gain)
+        self.data = np.array(self.data,dtype=np.float64)*gain
+        self.data = np.array(self.data,dtype=self.dtype)
+
+    def attenuate(self,gain):
+        gain = max(0.0,gain)
+        gain = min(1.0,gain)
         self.data = np.array(self.data,dtype=np.float64)*gain
         self.data = np.array(self.data,dtype=self.dtype)
 
